@@ -1,7 +1,7 @@
 # Rustpad
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/johnxni/rustpad)](https://hub.docker.com/r/johnxni/rustpad/)
-[![Docker Image Size](https://img.shields.io/docker/image-size/johnxni/rustpad/latest)](https://hub.docker.com/r/johnxni/rustpad/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/johnxni/tfwr-rustpad)](https://hub.docker.com/r/johnxni/tfwr-rustpad/)
+[![Docker Image Size](https://img.shields.io/docker/image-size/johnxni/tfwr-rustpad/latest)](https://hub.docker.com/r/johnxni/tfwr-rustpad/)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/johnxni/rustpad/ci.yml)](https://github.com/johnxni/rustpad/actions/workflows/ci.yml)
 
 **Rustpad** is an _efficient_ and _minimal_ open-source collaborative text
