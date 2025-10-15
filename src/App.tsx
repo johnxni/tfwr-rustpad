@@ -13,6 +13,8 @@ import animals from "./animals.json";
 import languages from "./languages.json";
 import Rustpad, { UserInfo } from "./rustpad";
 import useHash from "./useHash";
+import { setupTFWRIntelliSense } from "./TFWRIntelliSense";
+
 
 function getWsUri(id: string) {
   let url = new URL(`api/socket/${id}`, window.location.href);
@@ -30,7 +32,7 @@ function generateHue() {
 
 function App() {
   const toast = useToast();
-  const [language, setLanguage] = useState("plaintext");
+  const [language, setLanguage] = useState("python");
   const [connection, setConnection] = useState<
     "connected" | "disconnected" | "desynchronized"
   >("disconnected");
@@ -43,9 +45,12 @@ function App() {
   });
   const [editor, setEditor] = useState<editor.IStandaloneCodeEditor>();
   const [darkMode, setDarkMode] = useLocalStorageState("darkMode", {
-    defaultValue: false,
+    defaultValue: true,
   });
   const rustpad = useRef<Rustpad>();
+  const monacoRef = useRef<any>(null);
+  const [monacoReady, setMonacoReady] = useState(false);
+  const intelliSenseDisposeRef = useRef<null | (() => void)>(null);
   const id = useHash();
 
   const [readCodeConfirmOpen, setReadCodeConfirmOpen] = useState(false);
@@ -89,20 +94,31 @@ function App() {
     }
   }, [connection, name, hue]);
 
+  // Register Python IntelliSense when ready
+  useEffect(() => {
+    const monaco = monacoRef.current;
+    if (!editor || !monaco) return;
+    if (intelliSenseDisposeRef.current) {
+      try { intelliSenseDisposeRef.current(); } catch {}
+      intelliSenseDisposeRef.current = null;
+    }
+    if (language === "python") {
+      intelliSenseDisposeRef.current = setupTFWRIntelliSense(editor, monaco);
+    }
+    return () => {
+      if (intelliSenseDisposeRef.current) {
+        try { intelliSenseDisposeRef.current(); } catch {}
+        intelliSenseDisposeRef.current = null;
+      }
+    };
+  }, [language, monacoReady, editor]);
+
   function handleLanguageChange(language: string) {
     setLanguage(language);
     if (rustpad.current?.setLanguage(language)) {
       toast({
         title: "Language updated",
-        description: (
-          <>
-            All users are now editing in{" "}
-            <Text as="span" fontWeight="semibold">
-              {language}
-            </Text>
-            .
-          </>
-        ),
+        description: `All users are now editing in ${language}.`,
         status: "info",
         duration: 2000,
         isClosable: true,
@@ -160,11 +176,9 @@ function App() {
           documentId={id}
           connection={connection}
           darkMode={darkMode}
-          language={language}
           currentUser={{ name, hue }}
           users={users}
           onDarkModeChange={handleDarkModeChange}
-          onLanguageChange={handleLanguageChange}
           onLoadSample={() => handleLoadSample(false)}
           onChangeName={(name) => name.length > 0 && setName(name)}
           onChangeColor={() => setHue(generateHue())}
@@ -201,8 +215,19 @@ function App() {
               options={{
                 automaticLayout: true,
                 fontSize: 13,
+                quickSuggestions: true,
+                suggestOnTriggerCharacters: true,
+                tabCompletion: "on",
               }}
-              onMount={(editor) => setEditor(editor)}
+              onMount={(editor: any, monaco: any) => {
+                setEditor(editor as editor.IStandaloneCodeEditor);
+                monacoRef.current = monaco;
+                // Ensure Tab doesn't move focus out of the editor
+                try {
+                  monaco.editor.setTabFocusMode(false);
+                } catch {}
+                setMonacoReady(true);
+              }}
             />
           </Box>
         </Flex>

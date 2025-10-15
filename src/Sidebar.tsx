@@ -7,7 +7,6 @@ import {
   InputGroup,
   InputRightElement,
   Link,
-  Select,
   Stack,
   Switch,
   Text,
@@ -17,18 +16,15 @@ import { VscRepo } from "react-icons/vsc";
 
 import ConnectionStatus from "./ConnectionStatus";
 import User from "./User";
-import languages from "./languages.json";
 import type { UserInfo } from "./rustpad";
 
 export type SidebarProps = {
   documentId: string;
   connection: "connected" | "disconnected" | "desynchronized";
   darkMode: boolean;
-  language: string;
   currentUser: UserInfo;
   users: Record<number, UserInfo>;
   onDarkModeChange: () => void;
-  onLanguageChange: (language: string) => void;
   onLoadSample: () => void;
   onChangeName: (name: string) => void;
   onChangeColor: () => void;
@@ -38,11 +34,9 @@ function Sidebar({
   documentId,
   connection,
   darkMode,
-  language,
   currentUser,
   users,
   onDarkModeChange,
-  onLanguageChange,
   onLoadSample,
   onChangeName,
   onChangeColor,
@@ -80,22 +74,7 @@ function Sidebar({
         <Switch isChecked={darkMode} onChange={onDarkModeChange} />
       </Flex>
 
-      <Heading mt={4} mb={1.5} size="sm">
-        Language
-      </Heading>
-      <Select
-        size="sm"
-        bgColor={darkMode ? "#3c3c3c" : "white"}
-        borderColor={darkMode ? "#3c3c3c" : "white"}
-        value={language}
-        onChange={(event) => onLanguageChange(event.target.value)}
-      >
-        {languages.map((lang) => (
-          <option key={lang} value={lang} style={{ color: "black" }}>
-            {lang}
-          </option>
-        ))}
-      </Select>
+      {/* Language selection removed per customization */}
 
       <Heading mt={4} mb={1.5} size="sm">
         Share Link
@@ -143,38 +122,32 @@ function Sidebar({
         About
       </Heading>
       <Text fontSize="sm" mb={1.5}>
-        <strong>Rustpad</strong> is an open-source collaborative text editor
-        based on the <em>operational transformation</em> algorithm.
+        This is a collaborative text editor aimed to play
+        {" "}
+        <em>"The Farmer was Replaced"</em>.
+      </Text>
+      <Text fontSize="sm" mb={1.5}>
+        The game uses a <strong>python-like</strong> language. Not all features are
+        available, and many features are unlocked as you progress through the game.
       </Text>
       <Text fontSize="sm" mb={1.5}>
         Share a link to this pad with others, and they can edit from their
         browser while seeing your changes in real time.
       </Text>
       <Text fontSize="sm" mb={1.5}>
-        Built using Rust and TypeScript. See the{" "}
+        This website is powered by an open source project
+        {" "}
         <Link
           color="blue.600"
           fontWeight="semibold"
           href="https://github.com/ekzhang/rustpad"
           isExternal
         >
-          GitHub repository
-        </Link>{" "}
-        for details.
+          Rustpad
+        </Link>
+        .
       </Text>
 
-      <Button
-        size="sm"
-        colorScheme={darkMode ? "whiteAlpha" : "blackAlpha"}
-        borderColor={darkMode ? "purple.400" : "purple.600"}
-        color={darkMode ? "purple.400" : "purple.600"}
-        variant="outline"
-        leftIcon={<VscRepo />}
-        mt={1}
-        onClick={onLoadSample}
-      >
-        Read the code
-      </Button>
     </Container>
   );
 }
