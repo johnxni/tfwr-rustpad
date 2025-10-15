@@ -1,7 +1,11 @@
-# This file gives Python type definitions to TFWR builtins to allow editing code with Python editors.
-# Note that the games language is not Python and these definitions are only an approximation.
-# Contributed by @Noon, @KlingonDragon and @dieckie on the TFWR Discord server.
+"""
+Copy-paste of builtin functions from the game (2025-10-15).
 
+Other changes:
+    - native python functions (e.g. list, abs, etc)
+    - added more hats
+
+"""
 from typing import Any, Optional, Iterable
 
 
@@ -52,11 +56,89 @@ class Hat:
     """A member of the Hats class"""
 
 class Hats:
-    Straw_Hat: Hat
-    """The default hat."""
+    # Straw_Hat: Hat
+    # """The default hat."""
+
+    # Dinosaur_Hat: Hat
+    # """Equip it to start the dinosaur game."""
+
+    Brown_Hat: Hat
+    """A brown hat."""
+
+    Cactus_Hat: Hat
+    """A hat shaped like a cactus."""
+
+    Carrot_Hat: Hat
+    """A hat shaped like a carrot."""
 
     Dinosaur_Hat: Hat
     """Equip it to start the dinosaur game."""
+
+    Gold_Hat: Hat
+    """A golden hat."""
+
+    Gold_Trophy_Hat: Hat
+    """A golden trophy hat."""
+
+    Golden_Cactus_Hat: Hat
+    """A golden hat shaped like a cactus."""
+
+    Golden_Carrot_Hat: Hat
+    """A golden hat shaped like a carrot."""
+
+    Golden_Gold_Hat: Hat
+    """A golden version of the gold hat."""
+
+    Golden_Pumpkin_Hat: Hat
+    """A golden hat shaped like a pumpkin."""
+
+    Golden_Sunflower_Hat: Hat
+    """A golden hat shaped like a sunflower."""
+
+    Golden_Tree_Hat: Hat
+    """A golden hat shaped like a tree."""
+
+    Gray_Hat: Hat
+    """A gray hat."""
+
+    Green_Hat: Hat
+    """A green hat."""
+
+    Pumpkin_Hat: Hat
+    """A hat shaped like a pumpkin."""
+
+    Purple_Hat: Hat
+    """A purple hat."""
+
+    Silver_Trophy_Hat: Hat
+    """A silver trophy hat."""
+
+    Straw_Hat: Hat
+    """The default hat."""
+
+    Sunflower_Hat: Hat
+    """A hat shaped like a sunflower."""
+
+    The_Farmers_Remains: Hat
+    """The remains of the farmer."""
+
+    Top_Hat: Hat
+    """A fancy top hat."""
+
+    Traffic_Cone: Hat
+    """A traffic cone hat."""
+
+    Traffic_Cone_Stack: Hat
+    """A stack of traffic cones as a hat."""
+
+    Tree_Hat: Hat
+    """A hat shaped like a tree."""
+
+    Wizard_Hat: Hat
+    """A magical wizard hat."""
+
+    Wood_Trophy_Hat: Hat
+    """A wooden trophy hat."""
 
 # -------------------------------------------------------------------------------
 class Leaderboard:
