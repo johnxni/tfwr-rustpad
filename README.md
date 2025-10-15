@@ -1,8 +1,8 @@
 # Rustpad
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/ekzhang/rustpad)](https://hub.docker.com/r/ekzhang/rustpad/)
-[![Docker Image Size](https://img.shields.io/docker/image-size/ekzhang/rustpad/latest)](https://hub.docker.com/r/ekzhang/rustpad/)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/ekzhang/rustpad/ci.yml)](https://github.com/ekzhang/rustpad/actions/workflows/ci.yml)
+[![Docker Pulls](https://img.shields.io/docker/pulls/johnxni/rustpad)](https://hub.docker.com/r/johnxni/rustpad/)
+[![Docker Image Size](https://img.shields.io/docker/image-size/johnxni/rustpad/latest)](https://hub.docker.com/r/johnxni/rustpad/)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/johnxni/rustpad/ci.yml)](https://github.com/johnxni/rustpad/actions/workflows/ci.yml)
 
 **Rustpad** is an _efficient_ and _minimal_ open-source collaborative text
 editor based on the operational transformation algorithm. It lets users
@@ -100,7 +100,7 @@ version of this image from Docker Hub. It has multi-platform support for
 `linux/amd64` and `linux/arm64`.
 
 ```
-docker pull ekzhang/rustpad
+docker pull johnxni/rustpad
 ```
 
 (You can also manually build this image with `docker build -t rustpad .` in the
@@ -108,7 +108,7 @@ project root directory.) To run locally, execute the following command, then
 open `http://localhost:3030` in your browser.
 
 ```
-docker run --rm -dp 3030:3030 ekzhang/rustpad
+docker run --rm -dp 3030:3030 johnxni/rustpad
 ```
 
 We deploy a public instance of this image using [Fly.io](https://fly.io/).
